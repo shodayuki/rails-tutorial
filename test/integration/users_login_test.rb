@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
-  test "login width invalid information" do
+  def setup
+    @user = users(:michael)
+  end
+
+  test "login with valid email/invalid password" do
     get login_path
     assert_template'sessions/new'
     post login_path, params: { session: { email: "", password: "" }}
